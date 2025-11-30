@@ -1,0 +1,56 @@
+{
+    "name": "example-config-1",
+    "coreRu": [
+        [
+            "основа"
+        ],
+        [
+            "основа2"
+        ],
+        [
+            "основа3.0",
+            "основа3.1"
+        ]
+    ],
+    "coreEn": [
+        [
+            "base1"
+        ],
+        [
+            "base2"
+        ],
+        [
+            "base3.0",
+            "base3.1"
+        ]
+    ],
+    "coreSplitSymbols": [
+        "",
+        " ",
+        "-",
+        "_",
+        "."
+    ],
+    "suffixSymbols": [
+        "",
+        " ",
+        "-",
+        "_",
+        ".",
+        ",",
+        "!",
+        ":"
+    ],
+    "templates": [
+        "$core[0]$s",
+        "$core[1]$s",
+        "$core[2]$s"
+    ],
+    "maxSuffixLength": 3,
+    "minSuffixLength": 0,
+    "generateRu": true,
+    "generateEn": true,
+    "generateRuAsEn": true,
+    "generateEnAsRu": true,
+    "generateWithCapitalization": true
+}
