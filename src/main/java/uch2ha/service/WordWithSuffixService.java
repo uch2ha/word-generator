@@ -81,11 +81,13 @@ public class WordWithSuffixService {
 						continue;
 					}
 
+					Set<String> wordsWithEndings = handleWordEndingCombinations(candidateWords, config, alphabetSet);
+
 					if (!Main.isIsCalculationMode()) {
-						fileWriter.writeBatch(candidateWords);
+						fileWriter.writeBatch(wordsWithEndings);
 					}
 
-					handleStatCalculationLogic(candidateWords, lang);
+					handleStatCalculationLogic(wordsWithEndings, lang);
 				}
 			}
 			logger.info("Finished with suffix length {} for {}", currentSuffixLength, lang);
@@ -94,6 +96,26 @@ public class WordWithSuffixService {
 		logger.info("Iteration count: {}", iterationCount);
 
 		fileWriter.close();
+	}
+
+	private Set<String> handleWordEndingCombinations(Set<String> candidateWords, GeneratorConfig config,
+			Set<String> alphabetSet) {
+		if (config.getEndingSymbols() == null || config.getEndingSymbols().isEmpty()) {
+			return alphabetSet;
+		}
+
+		Set<String> wordsWithEndings = new HashSet<>();
+
+		for (String candidateWord : candidateWords) {
+			wordsWithEndings.add(candidateWord);
+			for (String ending : config.getEndingSymbols()) {
+				if (wordByAlphabetValidator.validateWord(ending, alphabetSet)) {
+					wordsWithEndings.add(candidateWord + ending);
+				}
+			}
+		}
+
+		return wordsWithEndings;
 	}
 
 	private void handleStatCalculationLogic(Set<String> candidateWords, Lang lang) {

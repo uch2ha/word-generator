@@ -10,6 +10,16 @@ public class WordByAlphabetValidator {
 		}
 	}
 
+	public boolean validateWord(String word, Set<String> alphabetSet) {
+		try {
+			isWordFromAlphabet(word, alphabetSet);
+		} catch (Exception e) {
+			return false;
+		}
+
+		return true;
+	}
+
 	private void isWordFromAlphabet(String word, Set<String> alphabetSet) {
 		for (int i = 0; i < word.length(); i++) {
 			char c = word.charAt(i);

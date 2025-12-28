@@ -44,10 +44,18 @@
     "templates": [
         "$core[0]$s",
         "$core[1]$s",
-        "$core[2]$s"
+        "$core[2]$s",
+        "$core[0]$s$core[1]",
+        "$core[1]$s$core[0]"
     ],
-    "maxSuffixLength": 3,
+    "endingSymbols": [
+        "!",
+        "1",
+        "end",
+        "конец"
+    ],
     "minSuffixLength": 0,
+    "maxSuffixLength": 2,
     "generateRu": true,
     "generateEn": true,
     "generateRuAsEn": true,
