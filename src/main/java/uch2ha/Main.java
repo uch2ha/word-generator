@@ -16,10 +16,10 @@ public class Main {
 
 	private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
-	public static Instant initTime = Instant.now();
-	public static Path outputFolderPath;
-	public static boolean isCalculationMode = true;
-	public static boolean isLogDebugRAM = false;
+	private static final Instant initTime = Instant.now();
+	private static Path outputFolderPath;
+	private static boolean isCalculationMode = false;
+	private static boolean isLogDebugRAM = false;
 
 	private static long totalRuWordsAmountForCalculation = 0;
 	private static long totalEnWordsAmountForCalculation = 0;
@@ -28,7 +28,7 @@ public class Main {
 
 		if (args.length == 0) {
 			// Default for testing
-			args = new String[]{"myConfigs/example.json", "output"};
+			args = new String[]{"configs/example.json", "output"};
 		}
 
 		if (args.length < 2) {
@@ -49,12 +49,39 @@ public class Main {
 				!isCalculationMode);
 
 		DependencyInjectionContainer container = new DependencyInjectionContainer();
-		BaseWordService baseWordService = container.getBaseWordServiceEntryPoint();
+		BaseWordService baseWordService = container.getEntryPoint();
 		baseWordService.generateAndSave(config);
 
-		logger.info("Generation complete! Took: " + Duration.between(initTime, Instant.now()));
+		logger.info("Generation complete! Took: {}s", Duration.between(initTime, Instant.now()).toSeconds());
 		logCalculationStats();
 		System.exit(0);
+	}
+
+	private static void logCalculationStats() {
+		long totalWords = totalEnWordsAmountForCalculation + totalRuWordsAmountForCalculation;
+
+		logger.info("CALC STATS | Total: {} words | EN: {} | RU: {}",
+				totalWords,
+				totalEnWordsAmountForCalculation,
+				totalRuWordsAmountForCalculation);
+	}
+
+	// GETTERS and SETTERS
+
+	public static Instant getInitTime() {
+		return initTime;
+	}
+
+	public static Path getOutputFolderPath() {
+		return outputFolderPath;
+	}
+
+	public static boolean isIsLogDebugRAM() {
+		return isLogDebugRAM;
+	}
+
+	public static boolean isIsCalculationMode() {
+		return isCalculationMode;
 	}
 
 	public static long getTotalRuWordsAmountForCalculation() {
@@ -73,12 +100,4 @@ public class Main {
 		Main.totalEnWordsAmountForCalculation = totalEnWordsAmountForCalculation;
 	}
 
-	private static void logCalculationStats() {
-		long totalWords = totalEnWordsAmountForCalculation + totalRuWordsAmountForCalculation;
-
-		logger.info("CALC STATS | Total: {} words | EN: {} | RU: {}",
-				totalWords,
-				totalEnWordsAmountForCalculation,
-				totalRuWordsAmountForCalculation);
-	}
 }

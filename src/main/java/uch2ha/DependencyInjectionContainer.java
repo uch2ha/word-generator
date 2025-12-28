@@ -45,7 +45,7 @@ public class DependencyInjectionContainer {
 		);
 	}
 
-	public BaseWordService getBaseWordServiceEntryPoint() {
+	public BaseWordService getEntryPoint() {
 		return baseWordService;
 	}
 }

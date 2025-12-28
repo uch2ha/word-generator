@@ -41,7 +41,7 @@ public class WordWithSuffixService {
 		allowedChars.addAll(Lang.EN.equals(lang) ? KeyboardLayoutUtil.enSet : KeyboardLayoutUtil.ruSet);
 
 		ResultWordSaver.ResultFileWriter fileWriter = resultWordSaver
-				.createWriter(config.getName(), Main.outputFolderPath, lang.name().toLowerCase());
+				.createWriter(config.getName(), lang);
 
 		int iterationCount = 0;
 
@@ -81,7 +81,7 @@ public class WordWithSuffixService {
 						continue;
 					}
 
-					if (!Main.isCalculationMode) {
+					if (!Main.isIsCalculationMode()) {
 						fileWriter.writeBatch(candidateWords);
 					}
 

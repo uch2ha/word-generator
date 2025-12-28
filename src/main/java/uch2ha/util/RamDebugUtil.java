@@ -21,7 +21,7 @@ public class RamDebugUtil {
 		long usedMemory = totalMemory - freeMemory;   // actual memory your app is using
 		long maxMemory = runtime.maxMemory();         // max memory JVM will ever use
 
-		if (Main.isLogDebugRAM) {
+		if (Main.isIsLogDebugRAM()) {
 			logger.info("Memory [Used: {} MB, Free: {} MB, Allocated: {} MB, Max: {} MB]",
 					usedMemory / MB, freeMemory / MB, totalMemory / MB, maxMemory / MB);
 		}

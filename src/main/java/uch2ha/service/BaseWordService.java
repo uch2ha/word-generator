@@ -39,7 +39,6 @@ public class BaseWordService {
 			} else {
 				wordWithSuffixService.process(ruBaseWords, KeyboardLayoutUtil.ruSet, config, Lang.RU);
 				ruBaseWords.clear();
-				ruBaseWords = null; // should encourage GC?
 			}
 		}
 
@@ -51,7 +50,6 @@ public class BaseWordService {
 			} else {
 				wordWithSuffixService.process(enBaseWords, KeyboardLayoutUtil.enSet, config, Lang.EN);
 				enBaseWords.clear();
-				enBaseWords = null; // should encourage GC?
 			}
 		}
 	}

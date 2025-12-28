@@ -1,5 +1,8 @@
 package uch2ha.saver;
 
+import uch2ha.Main;
+import uch2ha.model.Lang;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,9 +15,12 @@ public class ResultWordSaver {
 	//	private static final long MAX_FILE_SIZE_IN_BYTES = 50L * 1024 * 1024 * 1024; // 50GB
 	private static final long MAX_FILE_SIZE_IN_BYTES = 52L * 1024 * 1024 * 1024; //
 
-	public ResultFileWriter createWriter(String configName, Path outputDir, String filePrefix) throws IOException {
+	public ResultFileWriter createWriter(String configName, Lang lang) throws IOException {
+		String timestamp = Main.getInitTime().toString().replace(":", "-");
+		String langString = lang.name().toLowerCase();
+		Path outputDir = Path.of(Main.getOutputFolderPath().toString(), configName, timestamp, langString);
 		Files.createDirectories(outputDir);
-		return new ResultFileWriter(configName, outputDir, filePrefix, MAX_FILE_SIZE_IN_BYTES);
+		return new ResultFileWriter(configName, outputDir, langString, MAX_FILE_SIZE_IN_BYTES);
 	}
 
 	public class ResultFileWriter {
