@@ -1,5 +1,8 @@
 .idea
 target
+myConfigs
+output
+GEMINI.md
 
 # Compiled class file
 *.class

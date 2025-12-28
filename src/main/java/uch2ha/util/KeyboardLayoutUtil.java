@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class KeyboardLayoutUtils {
+public class KeyboardLayoutUtil {
 
 	public static final Map<String, String> ruToEnMap = Map.ofEntries(
 			Map.entry("й", "q"),

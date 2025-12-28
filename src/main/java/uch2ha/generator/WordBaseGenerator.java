@@ -5,7 +5,7 @@ import uch2ha.model.WordBaseGenerationResult;
 import uch2ha.processor.KeyboardLayoutProcessor;
 import uch2ha.processor.WordCapitalizationProcessor;
 import uch2ha.processor.WordTemplateProcessor;
-import uch2ha.util.KeyboardLayoutUtils;
+import uch2ha.util.KeyboardLayoutUtil;
 import uch2ha.validator.WordByAlphabetValidator;
 
 import java.util.HashSet;
@@ -49,10 +49,10 @@ public class WordBaseGenerator {
 		}
 
 		if (config.isGenerateRuAsEn()) {
-			ruAsEnWords.addAll(keyboardLayoutProcessor.convertSet(ruWords, KeyboardLayoutUtils.ruToEnMap));
+			ruAsEnWords.addAll(keyboardLayoutProcessor.convertSet(ruWords, KeyboardLayoutUtil.ruToEnMap));
 		}
 		if (config.isGenerateEnAsRu()) {
-			enAsRuWords.addAll(keyboardLayoutProcessor.convertSet(enWords, KeyboardLayoutUtils.enToRuMap));
+			enAsRuWords.addAll(keyboardLayoutProcessor.convertSet(enWords, KeyboardLayoutUtil.enToRuMap));
 		}
 
 		Set<String> combinedRu = new HashSet<>();
@@ -68,8 +68,8 @@ public class WordBaseGenerator {
 			combinedEn.addAll(wordCapitalizationProcessor.capitalizeFirstLetters(combinedEn));
 		}
 
-		wordByAlphabetValidator.validate(combinedRu, KeyboardLayoutUtils.ruSet);
-		wordByAlphabetValidator.validate(combinedEn, KeyboardLayoutUtils.enSet);
+		wordByAlphabetValidator.validate(combinedRu, KeyboardLayoutUtil.ruSet);
+		wordByAlphabetValidator.validate(combinedEn, KeyboardLayoutUtil.enSet);
 
 		return new WordBaseGenerationResult(combinedRu, combinedEn);
 	}
