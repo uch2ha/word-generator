@@ -18,26 +18,27 @@ public class Main {
 
 	private static final Instant initTime = Instant.now();
 	private static Path outputFolderPath;
-	private static boolean isCalculationMode = false;
-	private static boolean isLogDebugRAM = false;
+	private static boolean isCalculationMode;
+	private static boolean isLogDebugRAM;
 
 	private static long totalRuWordsAmountForCalculation = 0;
 	private static long totalEnWordsAmountForCalculation = 0;
 
 	public static void main(String[] args) throws Exception {
-
 		if (args.length == 0) {
-			// Default for testing
-			args = new String[]{"configs/example.json", "output"};
+			// Default values
+			args = new String[]{"configs/example.json", "output", "false", "false"};
 		}
 
-		if (args.length < 2) {
-			logger.error("Usage: java WordGenerator <config.json> <output-folder>");
+		if (args.length < 4) {
+			logger.error("Usage: run + <config.json> <output-folder> <isCalculationMode> <isLogDebugRAM>");
 			System.exit(1);
 		}
 
 		String configPath = args[0];
 		String outputFolder = args[1];
+		isCalculationMode = Boolean.parseBoolean(args[2]);
+		isLogDebugRAM = Boolean.parseBoolean(args[3]);
 
 		outputFolderPath = Files.createDirectories(Path.of(outputFolder));
 
