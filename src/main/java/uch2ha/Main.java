@@ -5,17 +5,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uch2ha.model.GeneratorConfig;
 import uch2ha.service.BaseWordService;
-import uch2ha.util.TimestampUtil;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 
 public class Main {
 
 	private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
-	public static String initTime = TimestampUtil.getTimestamp();
+	public static Instant initTime = Instant.now();
 	public static Path outputFolderPath;
 	public static boolean isCalculationMode = true;
 	public static boolean isLogDebugRAM = false;
@@ -47,10 +48,11 @@ public class Main {
 		logger.info("Starting word generator for config {} (save words: {})...", config.getName(),
 				!isCalculationMode);
 
-		BaseWordService baseWordService = BaseWordService.getInstance();
+		DependencyInjectionContainer container = new DependencyInjectionContainer();
+		BaseWordService baseWordService = container.getBaseWordServiceEntryPoint();
 		baseWordService.generateAndSave(config);
 
-		logger.info("Generation complete!");
+		logger.info("Generation complete! Took: " + Duration.between(initTime, Instant.now()));
 		logCalculationStats();
 		System.exit(0);
 	}

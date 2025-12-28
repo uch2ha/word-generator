@@ -6,12 +6,6 @@ import java.util.Set;
 
 public class KeyboardLayoutProcessor {
 
-	private static final KeyboardLayoutProcessor INSTANCE = new KeyboardLayoutProcessor();
-
-	public static KeyboardLayoutProcessor getInstance() {
-		return INSTANCE;
-	}
-
 	public Set<String> convertSet(Set<String> input, Map<String, String> layoutMap) {
 		Set<String> converted = new HashSet<>();
 		for (String word : input) {

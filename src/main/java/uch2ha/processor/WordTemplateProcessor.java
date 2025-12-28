@@ -14,12 +14,6 @@ public class WordTemplateProcessor {
 
 	private static final Logger logger = LogManager.getLogger(WordTemplateProcessor.class.getName());
 
-	private static final WordTemplateProcessor INSTANCE = new WordTemplateProcessor();
-
-	public static WordTemplateProcessor getInstance() {
-		return INSTANCE;
-	}
-
 	private static final Pattern tokenPattern = Pattern.compile("\\$([a-zA-Z]+)(\\[(\\d+)])?");
 
 	public Set<String> processTemplate(String template, List<List<String>> core, List<String> symbols) {

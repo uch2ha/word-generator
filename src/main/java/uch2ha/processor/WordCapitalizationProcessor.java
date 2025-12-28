@@ -5,12 +5,6 @@ import java.util.stream.Collectors;
 
 public class WordCapitalizationProcessor {
 
-	private static final WordCapitalizationProcessor INSTANCE = new WordCapitalizationProcessor();
-
-	public static WordCapitalizationProcessor getInstance() {
-		return INSTANCE;
-	}
-
 	/**
 	 * Capitalizes the first character of each word in the provided set.
 	 *

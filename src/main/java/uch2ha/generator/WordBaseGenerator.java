@@ -18,17 +18,14 @@ public class WordBaseGenerator {
 	private final WordCapitalizationProcessor wordCapitalizationProcessor;
 	private final WordByAlphabetValidator wordByAlphabetValidator;
 
-	private WordBaseGenerator() {
-		wordTemplateProcessor = WordTemplateProcessor.getInstance();
-		keyboardLayoutProcessor = KeyboardLayoutProcessor.getInstance();
-		wordCapitalizationProcessor = WordCapitalizationProcessor.getInstance();
-		wordByAlphabetValidator = WordByAlphabetValidator.getInstance();
-	}
-
-	private static final WordBaseGenerator INSTANCE = new WordBaseGenerator();
-
-	public static WordBaseGenerator getInstance() {
-		return INSTANCE;
+	public WordBaseGenerator(WordTemplateProcessor wordTemplateProcessor,
+							 KeyboardLayoutProcessor keyboardLayoutProcessor,
+							 WordCapitalizationProcessor wordCapitalizationProcessor,
+							 WordByAlphabetValidator wordByAlphabetValidator) {
+		this.wordTemplateProcessor = wordTemplateProcessor;
+		this.keyboardLayoutProcessor = keyboardLayoutProcessor;
+		this.wordCapitalizationProcessor = wordCapitalizationProcessor;
+		this.wordByAlphabetValidator = wordByAlphabetValidator;
 	}
 
 	public WordBaseGenerationResult generate(GeneratorConfig config) {

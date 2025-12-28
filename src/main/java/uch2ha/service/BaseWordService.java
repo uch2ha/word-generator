@@ -18,15 +18,9 @@ public class BaseWordService {
 	private final WordBaseGenerator wordBaseGenerator;
 	private final WordWithSuffixService wordWithSuffixService;
 
-	private BaseWordService() {
-		wordBaseGenerator = WordBaseGenerator.getInstance();
-		wordWithSuffixService = WordWithSuffixService.getInstance();
-	}
-
-	private static final BaseWordService INSTANCE = new BaseWordService();
-
-	public static BaseWordService getInstance() {
-		return INSTANCE;
+	public BaseWordService(WordBaseGenerator wordBaseGenerator, WordWithSuffixService wordWithSuffixService) {
+		this.wordBaseGenerator = wordBaseGenerator;
+		this.wordWithSuffixService = wordWithSuffixService;
 	}
 
 	public void generateAndSave(GeneratorConfig config) throws IOException {

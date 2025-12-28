@@ -4,12 +4,6 @@ import java.util.Set;
 
 public class WordByAlphabetValidator {
 
-	private static final WordByAlphabetValidator INSTANCE = new WordByAlphabetValidator();
-
-	public static WordByAlphabetValidator getInstance() {
-		return INSTANCE;
-	}
-
 	public void validate(Set<String> words, Set<String> alphabetSet) {
 		for (String word : words) {
 			isWordFromAlphabet(word, alphabetSet);

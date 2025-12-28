@@ -26,15 +26,9 @@ public class WordWithSuffixService {
 	private final ResultWordSaver resultWordSaver;
 	private final WordByAlphabetValidator wordByAlphabetValidator;
 
-	private WordWithSuffixService() {
-		wordByAlphabetValidator = WordByAlphabetValidator.getInstance();
-		resultWordSaver = new ResultWordSaver();
-	}
-
-	private static final WordWithSuffixService INSTANCE = new WordWithSuffixService();
-
-	public static WordWithSuffixService getInstance() {
-		return INSTANCE;
+	public WordWithSuffixService(ResultWordSaver resultWordSaver, WordByAlphabetValidator wordByAlphabetValidator) {
+		this.resultWordSaver = resultWordSaver;
+		this.wordByAlphabetValidator = wordByAlphabetValidator;
 	}
 
 	public void process(Set<String> baseWords, Set<String> alphabetSet,
