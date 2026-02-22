@@ -12,15 +12,12 @@ import java.util.Set;
 
 public class ResultWordSaver {
 
-	//	private static final long MAX_FILE_SIZE_IN_BYTES = 50L * 1024 * 1024 * 1024; // 50GB
-	private static final long MAX_FILE_SIZE_IN_BYTES = 52L * 1024 * 1024 * 1024; //
-
 	public ResultFileWriter createWriter(String configName, Lang lang) throws IOException {
 		String timestamp = Main.getInitTime().toString().replace(":", "-");
 		String langString = lang.name().toLowerCase();
 		Path outputDir = Path.of(Main.getOutputFolderPath().toString(), configName, timestamp, langString);
 		Files.createDirectories(outputDir);
-		return new ResultFileWriter(configName, outputDir, langString, MAX_FILE_SIZE_IN_BYTES);
+		return new ResultFileWriter(configName, outputDir, langString);
 	}
 
 	public class ResultFileWriter {
@@ -34,12 +31,12 @@ public class ResultWordSaver {
 		private BufferedWriter writer;
 		private Path currentFile;
 
-		public ResultFileWriter(String configName, Path outputDir, String filePrefix, long maxFileSize)
+		public ResultFileWriter(String configName, Path outputDir, String filePrefix)
 				throws IOException {
 			this.configName = configName;
 			this.outputDir = outputDir;
 			this.filePrefix = filePrefix;
-			this.maxFileSize = maxFileSize;
+			this.maxFileSize = Main.getMaxFileSizeInBytes();
 			rotateFile(); // open first file
 		}
 

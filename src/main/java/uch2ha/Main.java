@@ -20,6 +20,7 @@ public class Main {
 	private static Path outputFolderPath;
 	private static boolean isCalculationMode;
 	private static boolean isLogDebugRAM;
+	private static long maxFileSizeInBytes;
 
 	private static long totalRuWordsAmountForCalculation = 0;
 	private static long totalEnWordsAmountForCalculation = 0;
@@ -27,18 +28,25 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		if (args.length == 0) {
 			// Default values
-			args = new String[]{"configs/example.json", "output", "false", "false"};
+			long fileSize50GbInBytes = 50L * 1024 * 1024 * 1024;
+			String testDirD = "/mnt/d/w-generator-output";
+			args = new String[]{
+					"configs/example.json", testDirD, String.valueOf(fileSize50GbInBytes),
+					"false", "false",
+			};
 		}
 
-		if (args.length < 4) {
-			logger.error("Usage: run + <config.json> <output-folder> <isCalculationMode> <isLogDebugRAM>");
+		if (args.length < 5) {
+			logger.error("Usage: run + <config.json> <output-folder> <maxFileSizeInBytes>"
+					+ " <isCalculationMode> <isLogDebugRAM>");
 			System.exit(1);
 		}
 
 		String configPath = args[0];
 		String outputFolder = args[1];
-		isCalculationMode = Boolean.parseBoolean(args[2]);
-		isLogDebugRAM = Boolean.parseBoolean(args[3]);
+		maxFileSizeInBytes = Long.parseLong(args[2]);
+		isCalculationMode = Boolean.parseBoolean(args[3]);
+		isLogDebugRAM = Boolean.parseBoolean(args[4]);
 
 		outputFolderPath = Files.createDirectories(Path.of(outputFolder));
 
@@ -75,6 +83,10 @@ public class Main {
 
 	public static Path getOutputFolderPath() {
 		return outputFolderPath;
+	}
+
+	public static long getMaxFileSizeInBytes() {
+		return maxFileSizeInBytes;
 	}
 
 	public static boolean isIsLogDebugRAM() {
