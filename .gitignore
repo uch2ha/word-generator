@@ -3,6 +3,7 @@ target
 myConfigs
 output
 todo
+GEMINI.md
 
 # Compiled class file
 *.class

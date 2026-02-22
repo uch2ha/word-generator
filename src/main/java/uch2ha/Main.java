@@ -17,42 +17,31 @@ public class Main {
 	private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
 	private static final Instant initTime = Instant.now();
+
+	// config with default values
+	private static String configPathString;
+	private static String outputFolderPathString;
 	private static Path outputFolderPath;
 	private static boolean isCalculationMode;
 	private static boolean isLogDebugRAM;
-	private static long maxFileSizeInBytes;
+	private static long maxFileSizeInGb;
 
 	private static long totalRuWordsAmountForCalculation = 0;
 	private static long totalEnWordsAmountForCalculation = 0;
 
 	public static void main(String[] args) throws Exception {
 		if (args.length == 0) {
-			// Default values
-			long fileSize50GbInBytes = 50L * 1024 * 1024 * 1024;
-			String testDirD = "/mnt/d/w-generator-output";
-			args = new String[]{
-					"configs/example.json", testDirD, String.valueOf(fileSize50GbInBytes),
-					"false", "false",
-			};
+			setupDefaultParameters();
+			logger.info("No command-line arguments provided. Using default parameters.");
+		} else {
+			parseCliArgs(args);
 		}
 
-		if (args.length < 5) {
-			logger.error("Usage: run + <config.json> <output-folder> <maxFileSizeInBytes>"
-					+ " <isCalculationMode> <isLogDebugRAM>");
-			System.exit(1);
-		}
-
-		String configPath = args[0];
-		String outputFolder = args[1];
-		maxFileSizeInBytes = Long.parseLong(args[2]);
-		isCalculationMode = Boolean.parseBoolean(args[3]);
-		isLogDebugRAM = Boolean.parseBoolean(args[4]);
-
-		outputFolderPath = Files.createDirectories(Path.of(outputFolder));
+		outputFolderPath = Files.createDirectories(Path.of(outputFolderPathString));
 
 		// Parse config from JSON
 		ObjectMapper mapper = new ObjectMapper();
-		GeneratorConfig config = mapper.readValue(new File(configPath), GeneratorConfig.class);
+		GeneratorConfig config = mapper.readValue(new File(configPathString), GeneratorConfig.class);
 
 		logger.info("Starting word generator for config {} (save words: {})...", config.getName(),
 				!isCalculationMode);
@@ -64,6 +53,28 @@ public class Main {
 		logger.info("Generation complete! Took: {}s", Duration.between(initTime, Instant.now()).toSeconds());
 		logCalculationStats();
 		System.exit(0);
+	}
+
+	private static void setupDefaultParameters() {
+		configPathString = "./configs/example.json";
+		outputFolderPathString = "./word-generator-output";
+		maxFileSizeInGb = 50L;
+		isCalculationMode = false;
+		isLogDebugRAM = false;
+	}
+
+	private static void parseCliArgs(String[] args) {
+		if (args.length != 5) {
+			logger.error(
+					"Usage: java -jar <jar_file> <config.json path> <output-folder> <maxFileSizeInGb> <isCalculationMode> <isLogDebugRAM>");
+			System.exit(1);
+		}
+		configPathString = args[0];
+		outputFolderPathString = args[1];
+		maxFileSizeInGb = Long.parseLong(args[2]);
+		isCalculationMode = Boolean.parseBoolean(args[3]);
+		isLogDebugRAM = Boolean.parseBoolean(args[4]);
+		outputFolderPath = Path.of(outputFolderPathString);
 	}
 
 	private static void logCalculationStats() {
@@ -86,7 +97,8 @@ public class Main {
 	}
 
 	public static long getMaxFileSizeInBytes() {
-		return maxFileSizeInBytes;
+		// convert to bytes
+		return maxFileSizeInGb * 1024 * 1024 * 1024;
 	}
 
 	public static boolean isIsLogDebugRAM() {
