@@ -1,8 +1,16 @@
 # Word Generator
 
 Word Generator is a Java-based tool designed to generate massive word lists (up to millions or billions of combinations)
-using flexible, template-driven rules. It excels at creating custom datasets for security research, performance testing,
-and linguistic simulations.
+using flexible, template-driven rules. It is a powerful utility for building dictionary files and custom string
+datasets, optimized for password security audits, and hash-cracking research.
+
+### Table of Contents
+
+* [Introduction](#1-introduction)
+* [Getting Started](#2-getting-started)
+* [Configuration Guide](#3-configuration-guide)
+* [Architecture & Performance](#4-architecture--performance)
+* [Future Improvements](#5-future-improvements)
 
 ## 1. Introduction
 
@@ -16,7 +24,7 @@ keyboard layout or using specific capitalization patterns.
 * **Dual Language Support:** Native support for English (EN) and Russian (RU) alphabets.
 * **Keyboard Layout Conversion:** Automatically converts words between layouts (e.g., `привет` -> `ghbdtn`).
 * **Recursive Suffixes:** Generate combinations of characters, digits, and symbols up to a specified length.
-* **Massive Scale:** Handles file splitting and large-scale generation (hundreds GBs of data) without running out of
+* **Massive Scale:** Handles file splitting and large-scale generation (hundreds of GBs of data) without running out of
   memory.
 * **Calculation Mode:** Instantly calculate how many words your configuration *would* generate before you run it.
 
@@ -29,8 +37,6 @@ keyboard layout or using specific capitalization patterns.
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/your-username/word-generator.git
-   ```
-    ```bash
    cd word-generator
    ```
 2. **Build with Maven:**
@@ -106,7 +112,8 @@ The logic of your word generation is stored in a JSON file.
 
 The app is built for speed and reliability:
 
-* **Batching:** Suffixes are processed in batches (default: 500k). This prevents the application from running out of RAM (Out Of Memory errors) when generating and holding millions of words in memory before writing them to disk.
+* **Batching:** Suffixes are processed in batches (default: 500k). This prevents the application from running out of
+  RAM (Out Of Memory errors) when generating and holding millions of words in memory before writing them to disk.
 * **Validation:** Every word is validated against the target alphabet to prevent junk data.
 * **Low Footprint:** Efficiently clears internal sets to maintain a stable memory profile during long runs.
 
@@ -115,12 +122,14 @@ The app is built for speed and reliability:
 ## 5. Future Improvements
 
 - [ ] **Multi-threading:** Use Java threads for parallel processing to fully utilize modern CPUs.
-- [ ] **Enhanced Configuration:** Allow users to configure parameters like `batchSize` and more complex capitalization rules (e.g., camelCase, ALL CAPS).
+- [ ] **Enhanced Configuration:** Allow users to configure parameters like `batchSize` and more complex capitalization
+  rules (e.g., camelCase, ALL CAPS).
 - [ ] **Configurable Alphabets:** Allow users to provide their own custom lists of characters for suffix generation via
   JSON.
 - [ ] **Easy Execution:** Add a `.sh` startup script and a `Dockerfile` for easier deployment and usage.
 - [ ] **Zip/Gzip Support:** Write compressed output files directly to save disk space.
 - [ ] **Exclude Lists:** Option to filter out known words or patterns.
+- [ ] **Testing & Automation**: Add unit tests and implement a simple GitHub Actions CI/CD pipeline.
 
 ---
 
