@@ -2,27 +2,31 @@ package uch2ha.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GeneratorConfig {
 
 	@JsonProperty("name")
-	private String name;
+	private String name = "default_name";
 
 	@JsonProperty("coreRu")
-	private List<List<String>> coreRu;
+	private List<List<String>> coreRu = new ArrayList<>();
 
 	@JsonProperty("coreEn")
-	private List<List<String>> coreEn;
+	private List<List<String>> coreEn = new ArrayList<>();
 
 	@JsonProperty("coreSplitSymbols")
-	private List<String> coreSplitSymbols;
+	private List<String> coreSplitSymbols = new ArrayList<>();
 
 	@JsonProperty("suffixSymbols")
-	private List<String> suffixSymbols;
+	private List<String> suffixSymbols = new ArrayList<>();
 
 	@JsonProperty("templates")
-	private List<String> templates;
+	private List<String> templates = new ArrayList<>();
+
+	@JsonProperty("endingSymbols")
+	private List<String> endingSymbols = new ArrayList<>();
 
 	@JsonProperty("maxSuffixLength")
 	private int maxSuffixLength = 3;
@@ -44,9 +48,6 @@ public class GeneratorConfig {
 
 	@JsonProperty("generateWithCapitalization")
 	private boolean generateWithCapitalization = true;
-
-	@JsonProperty("endingSymbols")
-	private List<String> endingSymbols;
 
 	public GeneratorConfig() {
 	}
