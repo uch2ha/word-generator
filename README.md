@@ -4,6 +4,8 @@ Word Generator is a Java-based tool designed to generate massive word lists (up 
 using flexible, template-driven rules. It is a powerful utility for building dictionary files and custom string
 datasets, optimized for password security audits, and hash-cracking research.
 
+### Table of Contents
+
 * [Introduction](#1-introduction)
 * [Getting Started](#2-getting-started)
 * [Configuration Guide](#3-configuration-guide)
@@ -22,7 +24,7 @@ keyboard layout or using specific capitalization patterns.
 * **Dual Language Support:** Native support for English (EN) and Russian (RU) alphabets.
 * **Keyboard Layout Conversion:** Automatically converts words between layouts (e.g., `привет` -> `ghbdtn`).
 * **Recursive Suffixes:** Generate combinations of characters, digits, and symbols up to a specified length.
-* **Massive Scale:** Handles file splitting and large-scale generation (hundreds GBs of data) without running out of
+* **Massive Scale:** Handles file splitting and large-scale generation (hundreds of GBs of data) without running out of
   memory.
 * **Calculation Mode:** Instantly calculate how many words your configuration *would* generate before you run it.
 
@@ -35,8 +37,6 @@ keyboard layout or using specific capitalization patterns.
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/your-username/word-generator.git
-   ```
-    ```bash
    cd word-generator
    ```
 2. **Build with Maven:**
@@ -129,6 +129,7 @@ The app is built for speed and reliability:
 - [ ] **Easy Execution:** Add a `.sh` startup script and a `Dockerfile` for easier deployment and usage.
 - [ ] **Zip/Gzip Support:** Write compressed output files directly to save disk space.
 - [ ] **Exclude Lists:** Option to filter out known words or patterns.
+- [ ] **Testing & Automation**: Add unit tests and implement a simple GitHub Actions CI/CD pipeline.
 
 ---
 
