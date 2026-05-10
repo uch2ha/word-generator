@@ -101,7 +101,7 @@ public class WordWithSuffixService {
 	private Set<String> handleWordEndingCombinations(Set<String> candidateWords, GeneratorConfig config,
 			Set<String> alphabetSet) {
 		if (config.getEndingSymbols() == null || config.getEndingSymbols().isEmpty()) {
-			return alphabetSet;
+			return candidateWords;
 		}
 
 		Set<String> wordsWithEndings = new HashSet<>();

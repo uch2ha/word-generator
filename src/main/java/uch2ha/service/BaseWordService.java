@@ -43,7 +43,7 @@ public class BaseWordService {
 		}
 
 		// EN
-		if (config.isGenerateRu()) {
+		if (config.isGenerateEn()) {
 			Set<String> enBaseWords = baseWords.getCombinedEn();
 			if (enBaseWords.isEmpty()) {
 				logger.info("No EN base words generated.");
